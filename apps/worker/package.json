@@ -1,0 +1,20 @@
+{
+  "name": "@outreachhq/worker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "set ENABLE_EMAIL_WORKER=true&& ts-node-dev --respawn --transpile-only src/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/apps/worker/src/main.js"
+  },
+  "dependencies": {
+    "@nestjs/core": "^11.1.6",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
+

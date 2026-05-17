@@ -1,0 +1,24 @@
+{
+  "name": "outreachhq",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "apps/worker"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace @outreachhq/api\" \"npm run dev --workspace @outreachhq/web\" \"npm run dev --workspace @outreachhq/worker\"",
+    "build": "npm run build --workspace @outreachhq/api && npm run build --workspace @outreachhq/web && npm run build --workspace @outreachhq/worker",
+    "lint": "npm run lint --workspace @outreachhq/api && npm run lint --workspace @outreachhq/web",
+    "test": "npm run test --workspace @outreachhq/api",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "prettier": "^3.5.3"
+  },
+  "dependencies": {
+    "mongoose": "^8.16.1"
+  }
+}
