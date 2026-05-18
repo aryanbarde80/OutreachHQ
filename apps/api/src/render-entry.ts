@@ -4,6 +4,8 @@ import { AppModule } from './app.module';
 import { MongoIdInterceptor } from './common/interceptors/mongo-id.interceptor';
 import * as express from 'express';
 import { join } from 'path';
+import * as cron from 'node-cron';
+import axios from 'axios';
 
 async function bootstrap() {
   // Start the worker context if enabled
@@ -51,6 +53,21 @@ async function bootstrap() {
   const port = Number(process.env.PORT ?? process.env.API_PORT ?? 4000);
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}`);
+
+  // Keep-alive cron job: ping the server every 14 minutes
+  const renderUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${port}`;
+  cron.schedule('*/14 * * * *', async () => {
+    try {
+      console.log(`[Keep-Alive] Pinging server at ${renderUrl}/api/health...`);
+      await axios.get(`${renderUrl}/api/health`).catch(() => {
+        // Fallback to root if /api/health doesn't exist
+        return axios.get(renderUrl);
+      });
+      console.log('[Keep-Alive] Ping successful');
+    } catch (error) {
+      console.error('[Keep-Alive] Ping failed:', error instanceof Error ? error.message : error);
+    }
+  });
 }
 
 bootstrap();
