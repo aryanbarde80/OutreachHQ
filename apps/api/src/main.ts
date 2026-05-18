@@ -9,6 +9,7 @@ async function bootstrap() {
     origin: process.env.CLIENT_ORIGIN ?? 'http://localhost:5173',
     credentials: true,
   });
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
