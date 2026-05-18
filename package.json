@@ -12,6 +12,8 @@
     "build": "npm run build --workspace @outreachhq/api && npm run build --workspace @outreachhq/web && npm run build --workspace @outreachhq/worker",
     "lint": "npm run lint --workspace @outreachhq/api && npm run lint --workspace @outreachhq/web",
     "test": "npm run test --workspace @outreachhq/api",
+    "render:build": "npm install && npm run build --workspace @outreachhq/web && npm run build --workspace @outreachhq/api && npm run build --workspace @outreachhq/worker",
+    "render:start": "node apps/api/dist/render-entry.js",
     "format": "prettier --write ."
   },
   "devDependencies": {

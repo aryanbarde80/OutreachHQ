@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: outreachhq
+    env: node
+    plan: free
+    buildCommand: npm run render:build
+    startCommand: npm run render:start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: VITE_API_URL
+        value: https://outreachhq.onrender.com/api
+      - key: CLIENT_ORIGIN
+        value: https://outreachhq.onrender.com
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        sync: false
+      - key: REDIS_PASSWORD
+        sync: false
+      - key: SMTP_ENCRYPTION_KEY
+        generateValue: true
+      - key: ENABLE_EMAIL_WORKER
+        value: "true"
+      - key: UPLOAD_DIR
+        value: "/opt/render/project/src/uploads"
