@@ -28,5 +28,10 @@ export class AuthController {
   me(@CurrentUser() user: { id: string }) {
     return this.usersService.findById(user.id);
   }
+
+  @Get('health')
+  health() {
+    return { status: 'ok' };
+  }
 }
 
